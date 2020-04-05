@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+<style>
+  body {
+    font-family: sans-serif;
+  }
+  .panel {
+    display: flex;
+    width: auto;
+    height: 100vh;
+  }
+  #nothing {
+    justify-content: center;
+    align-items: center;
+  }
+  #nothing small {
+    font-size: .7rem;
+    opacity: .5;
+  }
+</style>
+
+<div id="nothing" class="panel active">
+  <div>
+    <small>Select a Frame or a Rectangle.</small>
+  </div>
+</div>
+
+<div id="borders" class="panel">
+  <a id="bbottom" href="#" class="button">Border bottom</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<script>
+
+
+
+$(function () {
+
+  $("#borders").hide();
+
+  var elem = null;
+
+  window.onmessage = async event => {
+    elem = event.data.pluginMessage
+    if (elem.kind === 'RECTANGLE' || elem.kind === 'FRAME') {
+      $(".panel").hide();
+      $("#borders").fadeIn();
+    } else {
+      $(".panel").hide();
+      $("#nothing").show();
+    }
+  }
+
+  $("#bbottom").on("click", function () {
+    parent.postMessage( { pluginMessage: { type: 'border-bottom', elem } }, '*' )
+  });
+});
+</script>
