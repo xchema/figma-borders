@@ -41,7 +41,8 @@ $(function () {
 
   window.onmessage = async event => {
     elem = event.data.pluginMessage
-    if (elem.kind === 'RECTANGLE' || elem.kind === 'FRAME') {
+    // if (elem.kind === 'RECTANGLE' || elem.kind === 'FRAME') {
+    if (elem.kind === 'FRAME') {
       $(".panel").hide();
       $("#borders").fadeIn();
     } else {
