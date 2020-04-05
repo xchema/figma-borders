@@ -15,7 +15,8 @@ figma.showUI(__html__);
 // verify if selection has correct type to apply border
 let correctType = function () {
   const elem = figma.currentPage.selection[0]; // get first element on selection
-  return (elem.type === 'RECTANGLE' || elem.type === 'FRAME') ? true : false;
+  // return (elem.type === 'RECTANGLE' || elem.type === 'FRAME') ? true : false;
+  return (elem.type === 'FRAME') ? true : false;
 };
 
 figma.on('selectionchange', () => {
@@ -37,7 +38,7 @@ figma.ui.onmessage = msg => {
   const selected = figma.currentPage.selection;
 
   if (msg.type === 'border-bottom' && selected.length && correctType()) {
-    
+
     console.log(figma.currentPage.selection[0].parent.type);
     const line = figma.createLine();
     line.x = 100
