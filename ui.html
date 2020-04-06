@@ -39,10 +39,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script>
   $(function () {
-
+    // listen for changes on current selected element in figma
     window.onmessage = async event => {
-      const elem = event.data.pluginMessage
-      // if (elem.kind === 'RECTANGLE' || elem.kind === 'FRAME') {
+      const elem = event.data.pluginMessage;
+      // check for correct selected element
       if (elem.kind === 'FRAME') {
         $(".panel").hide();
         $("#borders").fadeIn();
@@ -51,8 +51,18 @@
         $("#nothing").show();
       }
     }
+    // call for methods in the figma sandbox
     $("#bbottom").on("click", function () {
-      parent.postMessage( { pluginMessage: { type: 'border-bottom' } }, '*' )
+      parent.postMessage( { pluginMessage: { type: 'border-bottom' } }, '*' );
+    });
+    $("#bright").on("click", function () {
+      parent.postMessage( { pluginMessage: { type: 'border-right' } }, '*' );
+    });
+    $("#btop").on("click", function () {
+      parent.postMessage( { pluginMessage: { type: 'border-top' } }, '*' );
+    });
+    $("#bleft").on("click", function () {
+      parent.postMessage( { pluginMessage: { type: 'border-left' } }, '*' );
     });
   });
 </script>
