@@ -27,21 +27,45 @@ figma.on('selectionchange', function () {
 // Calls to "parent.postMessage" from within the HTML page will trigger this
 // callback. The callback will be passed the "pluginMessage" property of the
 // posted message.
-figma.ui.onmessage = function () {
+figma.ui.onmessage = function (msg) {
+    console.log(msg);
     var line = figma.createLine();
     var selected = figma.currentPage.selection[0];
     // append line to document
     figma.currentPage.appendChild(line);
-    // change line default properties
-    // line.x = selected.x;
-    // line.y = selected.y + selected.height;
-    line.resize(selected.width, line.height);
-    line.opacity = 0.2;
     //place line inside frame element
     selected.appendChild(line);
-    line.y = selected.height;
-    // line.width = 300;
-    // line.y = selected.height - 1;
+    // change line default properties based on option selected
+    if (msg.type === 'border-bottom') {
+        line.resize(selected.width, line.height);
+        line.y = selected.height;
+        line.constraints = {
+            horizontal: "STRETCH",
+            vertical: "MIN"
+        };
+    }
+    if (msg.type === 'border-right') {
+        line.resize(selected.height, line.height);
+        line.rotation = 90;
+        line.x = selected.width;
+        line.y = selected.height;
+        line.constraints = {
+            horizontal: "MIN",
+            vertical: "STRETCH"
+        };
+    }
+    // applying custom color to stroke
+    line.strokes = [{
+            type: "SOLID",
+            visible: true,
+            opacity: 1,
+            blendMode: "NORMAL",
+            color: {
+                r: 0.8078431487083435,
+                g: 0.8313725590705872,
+                b: 0.8549019694328308
+            }
+        }];
     // if (msg.type === 'border-bottom' && selected.length && correctType()) {
     //   // console.log(figma.currentPage.selection[0].parent.type);
     //   const line = figma.createLine();
