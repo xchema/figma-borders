@@ -52,7 +52,8 @@ $(function () {
   }
 
   $("#bbottom").on("click", function () {
-    parent.postMessage( { pluginMessage: { type: 'border-bottom', elem } }, '*' )
+    // parent.postMessage( { pluginMessage: { type: 'border-bottom', elem } }, '*' )
+    parent.postMessage( { pluginMessage: { type: 'border-bottom' } }, '*' )
   });
 });
 </script>

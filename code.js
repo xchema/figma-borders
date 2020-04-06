@@ -27,16 +27,34 @@ figma.on('selectionchange', function () {
 // Calls to "parent.postMessage" from within the HTML page will trigger this
 // callback. The callback will be passed the "pluginMessage" property of the
 // posted message.
-figma.ui.onmessage = function (msg) {
-    var selected = figma.currentPage.selection;
-    if (msg.type === 'border-bottom' && selected.length && correctType()) {
-        console.log(figma.currentPage.selection[0].parent.type);
-        var line = figma.createLine();
-        line.x = 100;
-    }
-    else {
-        console.log("select correct node");
-    }
+figma.ui.onmessage = function () {
+    var line = figma.createLine();
+    var selected = figma.currentPage.selection[0];
+    // append line to document
+    figma.currentPage.appendChild(line);
+    // change line default properties
+    // line.x = selected.x;
+    // line.y = selected.y + selected.height;
+    line.resize(selected.width, line.height);
+    line.opacity = 0.2;
+    //place line inside frame element
+    selected.appendChild(line);
+    line.y = selected.height;
+    // line.width = 300;
+    // line.y = selected.height - 1;
+    // if (msg.type === 'border-bottom' && selected.length && correctType()) {
+    //   // console.log(figma.currentPage.selection[0].parent.type);
+    //   const line = figma.createLine();
+    //   selected[0].appendChild(line);
+    //   line.y = 1;
+    //
+    //
+    //
+    //   // const line = figma.createLine();
+    //   // line.x = 100
+    // } else {
+    //   console.log("select correct node");
+    // }
     // Make sure to close the plugin when you're done. Otherwise the plugin will
     // keep running, which shows the cancel button at the bottom of the screen.
     // figma.closePlugin();
