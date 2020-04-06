@@ -2,6 +2,7 @@
 <style>
   body {
     font-family: sans-serif;
+    font-size: 1em;
   }
   .panel {
     display: flex;
@@ -18,6 +19,48 @@
   }
   #borders {
     display: none;
+    padding: 16px;
+  }
+  .label {
+    font-size: 0.6rem;
+    color: #868E96;
+    padding-bottom: 12px;
+  }
+  .border {
+    width: 24px;
+    height: 24px;
+    background: #DEE2E6;
+    display: inline-block;
+    box-sizing: border-box;
+    border-color: #ADB5BD;
+    border-width: 0;
+    border-style: solid;
+    margin-right: 8px;
+    transition: background .3s ease;
+  }
+  .border.bottom {
+    border-bottom-width: 2px;
+  }
+  .border.right {
+    border-right-width: 2px;
+  }
+  .border.top {
+    border-top-width: 2px;
+  }
+  .border.left {
+    border-left-width: 2px;
+  }
+  .border:hover {
+    background: #D0EBFF;
+  }
+  .border.bottom:hover,
+  .border.right:hover,
+  .border.top:hover,
+  .border.left:hover {
+    border-color: #339AF0;
+  }
+  .border:last-child {
+    margin-right: 0;
   }
 </style>
 
@@ -30,10 +73,13 @@
 
 <!-- FRAME SELECTED -->
 <div id="borders" class="panel">
-  <a id="bbottom" href="#" class="border bottom">Border bottom</a>
-  <a href="bright" href="#" class="border right">Border right</a>
-  <a href="btop" href="#" class="border right">Border top</a>
-  <a href="bleft" href="#" class="border left">Border left</a>
+  <div class="label">
+    Apply to
+  </div>
+  <a id="bbottom" href="#" class="border bottom" title="Bottom"></a>
+  <a href="bright" href="#" class="border right" title="Right"></a>
+  <a href="btop" href="#" class="border top" title="Top"></a>
+  <a href="bleft" href="#" class="border left" title="Left"></a>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
