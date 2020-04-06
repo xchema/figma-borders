@@ -16,44 +16,43 @@
     font-size: .7rem;
     opacity: .5;
   }
+  #borders {
+    display: none;
+  }
 </style>
 
+<!-- NO FRAME SELECTED -->
 <div id="nothing" class="panel active">
   <div>
     <small>Select a Frame.</small>
   </div>
 </div>
 
+<!-- FRAME SELECTED -->
 <div id="borders" class="panel">
-  <a id="bbottom" href="#" class="button">Border bottom</a>
+  <a id="bbottom" href="#" class="border bottom">Border bottom</a>
+  <a href="bright" href="#" class="border right">Border right</a>
+  <a href="btop" href="#" class="border right">Border top</a>
+  <a href="bleft" href="#" class="border left">Border left</a>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script>
+  $(function () {
 
-
-
-$(function () {
-
-  $("#borders").hide();
-
-  var elem = null;
-
-  window.onmessage = async event => {
-    elem = event.data.pluginMessage
-    // if (elem.kind === 'RECTANGLE' || elem.kind === 'FRAME') {
-    if (elem.kind === 'FRAME') {
-      $(".panel").hide();
-      $("#borders").fadeIn();
-    } else {
-      $(".panel").hide();
-      $("#nothing").show();
+    window.onmessage = async event => {
+      const elem = event.data.pluginMessage
+      // if (elem.kind === 'RECTANGLE' || elem.kind === 'FRAME') {
+      if (elem.kind === 'FRAME') {
+        $(".panel").hide();
+        $("#borders").fadeIn();
+      } else {
+        $(".panel").hide();
+        $("#nothing").show();
+      }
     }
-  }
-
-  $("#bbottom").on("click", function () {
-    // parent.postMessage( { pluginMessage: { type: 'border-bottom', elem } }, '*' )
-    parent.postMessage( { pluginMessage: { type: 'border-bottom' } }, '*' )
+    $("#bbottom").on("click", function () {
+      parent.postMessage( { pluginMessage: { type: 'border-bottom' } }, '*' )
+    });
   });
-});
 </script>
