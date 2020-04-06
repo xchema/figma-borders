@@ -46,6 +46,7 @@ figma.ui.onmessage = msg => {
 
   // change line default properties based on option selected
   if (msg.type === 'border-bottom') {
+    line.name = "--border-bottom";
     line.resize(selected.width, line.height);
     line.y = selected.height;
     line.constraints = {
@@ -54,12 +55,33 @@ figma.ui.onmessage = msg => {
     };
   }
   if (msg.type === 'border-right') {
+    line.name = "--border-right";
     line.resize(selected.height, line.height);
     line.rotation = 90;
     line.x = selected.width;
     line.y = selected.height;
     line.constraints = {
       horizontal: "MIN",
+      vertical: "STRETCH"
+    };
+  }
+  if (msg.type === 'border-top') {
+    line.name = "--border-top";
+    line.resize(selected.width, line.height);
+    line.y = 1; // might replace based on dynamic size generator in future release
+    line.constraints = {
+      horizontal: "STRETCH",
+      vertical: "MIN"
+    };
+  }
+  if (msg.type === 'border-left') {
+    line.name = "--border-left";
+    line.resize(selected.height, line.height);
+    line.rotation = 90;
+    line.x = 1; // might replace based on dynamic size generator in future release
+    line.y = selected.height;
+    line.constraints = {
+      horizontal: "MAX",
       vertical: "STRETCH"
     };
   }
