@@ -52,7 +52,7 @@ figma.ui.onmessage = function (msg) {
         line.x = selected.width;
         line.y = selected.height;
         line.constraints = {
-            horizontal: "MIN",
+            horizontal: "MAX",
             vertical: "STRETCH"
         };
     }

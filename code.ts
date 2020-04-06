@@ -61,7 +61,7 @@ figma.ui.onmessage = msg => {
     line.x = selected.width;
     line.y = selected.height;
     line.constraints = {
-      horizontal: "MIN",
+      horizontal: "MAX",
       vertical: "STRETCH"
     };
   }
@@ -81,7 +81,7 @@ figma.ui.onmessage = msg => {
     line.x = 1; // might replace based on dynamic size generator in future release
     line.y = selected.height;
     line.constraints = {
-      horizontal: "MAX",
+      horizontal: "MIN",
       vertical: "STRETCH"
     };
   }
