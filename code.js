@@ -1,8 +1,6 @@
-// This plugin will open a modal to prompt the user to enter a number, and
-// it will then create that many rectangles on the screen.
-// This file holds the main code for the plugins. It has access to the *document*.
-// You can access browser APIs in the <script> tag inside "ui.html" which has a
-// full browser enviroment (see documentation).
+// Borders by the Snapblocks team
+// Figma plugin that add independent borders to each side of a FRAME element.
+// https://github.com/xchema/figma-borders
 // This shows the HTML page in "ui.html".
 figma.showUI(__html__);
 // NOTE: resizing the ui window for plugin
@@ -24,11 +22,8 @@ figma.on('selectionchange', function () {
         figma.ui.postMessage({ type: 'selectionChange', elem: elem });
     }
 });
-// Calls to "parent.postMessage" from within the HTML page will trigger this
-// callback. The callback will be passed the "pluginMessage" property of the
-// posted message.
+// message from ui to figma sandbox
 figma.ui.onmessage = function (msg) {
-    console.log(msg);
     var line = figma.createLine();
     var selected = figma.currentPage.selection[0];
     // append line to document
@@ -88,20 +83,5 @@ figma.ui.onmessage = function (msg) {
                 b: 0.8549019694328308
             }
         }];
-    // if (msg.type === 'border-bottom' && selected.length && correctType()) {
-    //   // console.log(figma.currentPage.selection[0].parent.type);
-    //   const line = figma.createLine();
-    //   selected[0].appendChild(line);
-    //   line.y = 1;
-    //
-    //
-    //
-    //   // const line = figma.createLine();
-    //   // line.x = 100
-    // } else {
-    //   console.log("select correct node");
-    // }
-    // Make sure to close the plugin when you're done. Otherwise the plugin will
-    // keep running, which shows the cancel button at the bottom of the screen.
     // figma.closePlugin();
 };
